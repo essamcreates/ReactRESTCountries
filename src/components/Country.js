@@ -16,7 +16,6 @@ const Country = ({ country, onToggleVisited }) => {
         {country.flag}
         {country.region}
         {country.subregion}
-        {country.demonym}
         </p>
       <label>
         <input

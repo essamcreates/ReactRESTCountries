@@ -6,6 +6,7 @@ const CountryContainer = () => {
 
     const [countries, setCountries] = useState([]);
     const [visitedCountries, setVisitedCountries] = useState([])
+    const [filterText, setFilerText] = useState("");
 
     const loadData = async () => {
         const response = await fetch("https://restcountries.com/v3.1/all");
@@ -30,12 +31,33 @@ const CountryContainer = () => {
         }
     }
 
+    const handleFilterTextChange = (event) => {
+        setFilerText(event.target.value);
+    }
+
+    const filteredCountries = countries.filter((country) =>
+        country.name.common.toLowerCase().includes(filterText.toLowerCase())
+    );
+
+
     return (
         <>
             <h1>Country Club</h1>
+            <form>
+                {/* Step 4: Add filter input */}
+                <label>
+                    Filter Countries:
+                    <input
+                        type="text"
+                        value={filterText}
+                        onChange={handleFilterTextChange}
+                    />
+                </label>
+            </form>
             {countries.length > 0 ? (
                 <>
-                    <CountryList countries={countries} onToggleVisited={handleToggleVisited} />
+                    {/* Step 5: Use filteredCountries */}
+                    <CountryList countries={filteredCountries} onToggleVisited={handleToggleVisited} />
                     <VisitedCountryList visitedCountries={visitedCountries} />
                 </>
             ) : (

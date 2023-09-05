@@ -15,6 +15,7 @@ const VisitedCountryContainer = () => {
         console.log("loading data");
         loadData();
     },[]);
+    
 
 }
 
