@@ -6,7 +6,7 @@ const CountryContainer = () => {
 
     const [countries, setCountries] = useState([]);
     const [visitedCountries, setVisitedCountries] = useState([])
-    const [filterText, setFilerText] = useState("");
+    const [filterText, setFilterText] = useState("");
 
     const loadData = async () => {
         const response = await fetch("https://restcountries.com/v3.1/all");
@@ -32,7 +32,7 @@ const CountryContainer = () => {
     }
 
     const handleFilterTextChange = (event) => {
-        setFilerText(event.target.value);
+        setFilterText(event.target.value);
     }
 
     const filteredCountries = countries.filter((country) =>
@@ -58,7 +58,9 @@ const CountryContainer = () => {
                 <>
                     {/* Step 5: Use filteredCountries */}
                     <CountryList countries={filteredCountries} onToggleVisited={handleToggleVisited} />
+                    <div className="visitedCountries">
                     <VisitedCountryList visitedCountries={visitedCountries} />
+                    </div>
                 </>
             ) : (
                 <p>Loading...</p>
