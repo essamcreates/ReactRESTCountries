@@ -1,21 +1,21 @@
 import React from "react";
-import Country from "./Country"
 
-
-const VisitedCountryList = ({countries}) => {
-
-    const mappedCountries = countries.map(country => {
-        return <Country country={country} key={country.name.official}/>
-    })
-
-    return(
-        <>
-            <h2>Visited Countries</h2>
-            {mappedCountries}
-        </>
-    );
-
-
+const VisitedCountryList = ({ visitedCountries }) => {
+  return (
+    <>
+      <h2>Visited Countries</h2>
+      {visitedCountries && visitedCountries.length > 0 ? (
+        visitedCountries.map(country => (
+          <div key={country.name.common}>
+            <h3>{country.name.common}</h3>
+            <p>Capital City: {country.capital}</p>
+          </div>
+        ))
+      ) : (
+        <p>No visited countries yet.</p>
+      )}
+    </>
+  );
 };
 
-export default VisitedCountryList; 
+export default VisitedCountryList;

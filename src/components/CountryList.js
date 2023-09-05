@@ -1,21 +1,19 @@
-import React from "react"
-import Country from "./Country"
+import React from "react";
+import Country from "./Country";
 
+const CountryList = ({ countries, onToggleVisited }) => {
+  return (
+    <>
+      <h2>Countries</h2>
+      {countries.map(country => (
+        <Country
+          key={country.name.common}
+          country={country}
+          onToggleVisited={onToggleVisited}
+        />
+      ))}
+    </>
+  );
+};
 
-const CountryList = ({countries}) => {
-
-    const mappedCountries = countries.map(country => {
-        return <Country country={country} key={country.name.official}/>
-    })
-
-    return(
-        <>
-            <h2>Countries</h2>
-            {mappedCountries}
-        </>
-    )
-
-
-}
-
-export default CountryList; 
+export default CountryList;

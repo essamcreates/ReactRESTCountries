@@ -16,12 +16,6 @@ const VisitedCountryContainer = () => {
         loadData();
     },[]);
 
-    return(
-        <>
-            <h1>Country Club</h1>
-            { countries ? <VisitedCountryList countries={countries}/> : <p>loading...</p>}
-        </>
-    )
 }
 
 export default VisitedCountryContainer;

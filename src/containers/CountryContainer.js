@@ -4,27 +4,43 @@ import VisitedCountryList from "../components/VisitedCountryList";
 
 const CountryContainer = () => {
 
-    const [countries, setCountries] = useState(null);
+    const [countries, setCountries] = useState([]);
+    const [visitedCountries, setVisitedCountries] = useState([])
 
     const loadData = async () => {
         const response = await fetch("https://restcountries.com/v3.1/all");
         const jsonData = await response.json();
-        const countriesWithVisited = jsonData.map(country => ({
-            ...country,
-            visited: false,
-        }))
+        jsonData.splice(47, 1);
         setCountries(jsonData);
     }
 
     useEffect(() => {
         console.log("loading data");
         loadData();
-    },[]);
+    }, []);
 
-    return(
+    const handleToggleVisited = (country, visited) => {
+        if (visited) {
+            setVisitedCountries([...visitedCountries, country]);
+        } else {
+            const updatedVisitedCountries = visitedCountries.filter(
+                visitedCountry => visitedCountry.name.common !== country.name.common
+            );
+            setVisitedCountries(updatedVisitedCountries);
+        }
+    }
+
+    return (
         <>
             <h1>Country Club</h1>
-            { countries ? <CountryList countries={countries}/> : <p>loading...</p>}
+            {countries.length > 0 ? (
+                <>
+                    <CountryList countries={countries} onToggleVisited={handleToggleVisited} />
+                    <VisitedCountryList visitedCountries={visitedCountries} />
+                </>
+            ) : (
+                <p>Loading...</p>
+            )}
         </>
     )
 }
